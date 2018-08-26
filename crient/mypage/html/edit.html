@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div id = "edit" class = "hidden">
+    <form>
+        <p>チーム変更:
+            <select id = "TM_CD">
+                <!-- チームコードをDL -->
+                <option>
+            </select>
+        </p>
+        <p>SNSへの画像投稿依頼を自動許可する:<input type = "checkbox" id = "auto"></p>
+        <p>画像のDLを自動許可する(被写体):<input type = "checkbox" id = "auto"></p>
+        <p>画像のDLを自動許可する(撮影者):<input type = "checkbox" id = "auto"></p>
+
+        <p>好きなフレンズ<input type = "text" id = "friends"></p>
+
+        <p>
+            <label>血液型</label>
+            <label>RH-</label><input type = "checkbox" id = "blood_ex" value = "rh-">
+            <label>A</label><input type = "checkbox" name = "blood_type" value = "A">
+            <label>B</label><input type = "checkbox" name = "blood_type" value = "B">
+            <label>O</label><input type = "checkbox" name = "blood_type" value = "O">
+            <label>AB</label><input type = "checkbox" name = "blood_type" value = "AB">
+        </p>
+    </form>
+    <button type = "button" id = "edit_register" value = "edit_register">登録</button>
+</div>
+
+</body>
+</html>

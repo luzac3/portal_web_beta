@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<!-- 時間ごとにラベル的なあれで一覧が表示される -->
+
+<?php
+    // DB空データを取得
+
+    // イベント通番を配列にセット　セッションで取得
+    $arg_arr = array("EVNT_NUM" => $event_num);
+
+    $area = call_stored("get_area", $arg_arr);
+
+    // 並びは時間順
+    $event = call_stored("get_event", $arg_arr);
+
+    echo "<table>\n";
+    echo "<tr>\n";
+
+    // 場所の総数(列数)を取得
+    $row_num = 0;
+
+    forEach($area as $row){
+        $row_num++;
+        echo "<th>";
+        echo $row;
+        echo "</th>";
+        $interval = parseInt($row["EVNT_INTRVL"]);
+    }
+
+    echo "</tr>\n";
+
+    /*
+     * 開始日時を見て位置を組む
+     * 最初の企画Hourを最初に持ってくる
+     * 企画感覚ごとにTDを作成
+     * はみ出す(30分間隔なのに15分のものがあるなど)、前の時間で返す(次の時間だとぶつかる可能性あり)
+     */
+
+    $first_hour = 0;
+    $first_minute = 0;
+
+    $before_hour = 0;
+    $before_minute = 0;
+
+    echo "<tr>";
+    forEach($event as $row){
+        if(!$first_hour){
+            $first_hour = $row["HR"];
+            $first_minute = $row["MNT"];
+        }else{
+            $now_time = parseInt($first_hour) * 60 + parseInt($first_minute)
+                + parseInt($before_hour) * 60 + parseInt($before_minute)
+                + $interval;
+            if(
+                ($interval * 6) < (
+                    (parseInt($row["HR"]) * 60 + parseInt($first_minute))
+                    - (parseInt($before_hour) * 60 + parseInt($before_minute))
+                )
+            ){
+                $row_set = (parseInt($row["HR"]) * 60 + parseInt($first_minute)) - (parseInt($before_hour) * 60 + parseInt($before_minute));
+                echo "<tr>";
+                for($i = 0; $i <= $row_num; $i++){
+                    echo "<td rowspan = '" . $row_set . "'>(略)</td>";
+                }
+                echo "</tr>\n";
+            }else{
+                while($now_time < parseInt($row["HR"]) * 60 + parseInt($row["MNT"])){
+                    echo "<tr>";
+                    for($i = 0; $i <= $row_num; $i++){
+                        echo "<td></td>\n";
+                    }
+                    echo "</tr>\n";
+                }
+            }
+        }
+
+        echo "<tr>\n";
+        echo "<td>\n";
+        echo $row["HR"] + ":" + $row["MNT"] + ":" + $row["SCND"];
+        echo "</td>\n";
+
+        for($i = 0; $i <= $row_num; $i++){
+            if($i == $row["CNCLMNT_CD"]){
+                if($i == 0){
+                    echo "<td colspan =" . $row_num . ">";
+                }else{
+                    echo "<td>";
+                }
+
+                // 開始の場合
+                if($row["SE_CD"] == 1){
+                    echo $row["EVNT_NAME"] . " 企画者:" . $row["EVNT_USR_NUM"] . "場所:" . $row["PLC_NAME"];
+                }else{
+                    echo "終了";
+                }
+
+                echo "</td>\n";
+            }
+        }
+
+        echo "</tr>";
+
+        $before_hour = $row["HR"];
+        $before_minute = $row["MNT"];
+        echo "<td>";
+        echo "</td>";
+    }
+?>
+</table>
