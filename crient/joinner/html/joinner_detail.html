@@ -13,12 +13,22 @@
     </div>
 
     <div id = "jd_confirm">
-        <p>ユーザー名</p>
-        <p>ユーザーID</p>
-        <p>推しフレンズ</p>
-        <p>自己紹介</p>
-        <p>参加のきっかけ</p>
-        <p>何か言うことはないの？</p>
+        <?php
+            $result = call_stored("get_user_data");
+
+            echo "<p>ユーザー名" . $result["USR_NAME"] . "</p>\n";
+            echo "<p>ユーザーID" . $result["USR_ID"] . "</p>\n";
+            echo "<p>推しフレンズ" . $result["LK_FRNDS"] . "</p>\n";
+            echo "<p>参加のきっかけ" . $result[""] . "</p>\n";
+            echo "<p>ひとこと" . $result[""] . "</p>\n";
+
+            // 血液型
+            echo "<p>";
+            if($result["RH_FLG"]){
+                echo "RH-";
+            }
+            echo $result["BLD_TYP"] . "</p>\n";
+        ?>
     </div>
 </div>
 
