@@ -1,13 +1,25 @@
+<?php
+    session_start();
+
+    $evnt_num = $_SESSION["EVNT_NUM"];
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>参加者一覧</title>
 </head>
 <body>
 
 <!-- 参加者一覧を表示するシンプルなページ -->
 <div id = "joinner">
+    <?php
+        $arg_arr = array(
+            "EVNT_NUM" => $evnt_num
+        );
+
+        $member = call_stored("joinner",null);
+    ?>
     <p><label>役職:</label><a id = "user_id">user_id/ユーザー名</a></p>
 </div>
 

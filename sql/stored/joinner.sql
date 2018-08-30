@@ -4,7 +4,7 @@ DELIMITER //
 -- joinner 参加者を取得するクエリ
 --
 -- 【処理概要】
---  dl/SNSアップロード許可申請に対する許可を行う
+--  参加者一覧取得処理
 --
 --
 -- 【呼び出し元画面】
@@ -12,10 +12,6 @@ DELIMITER //
 --
 -- 【引数】
 --   _event_num           ：イベント通番
---   _applcnt_user_num    ：申請者ユーザ通番
---   _athrzruser_num      ：承認者ユーザ通番
---   _pictr_no            ：写真番号
---   _prmssn_cd           ：許可コード
 --
 --
 -- 【戻り値】
@@ -28,34 +24,59 @@ DELIMITER //
 -- ********************************************************************************************
 CREATE PROCEDURE `dl_sns_prmssn`(
     IN `_event_num` CHAR(5)
-    , IN `_applcnt_user_num` CHAR(5)
-    , IN `_athrzruser_num` CHAR(5)
-    , IN `_pictr_no` CHAR(4)
-    , IN `_prmssn_cd` CHAR(1)
     , OUT `exit_cd` INTEGER
 )
-COMMENT 'dl/SNSアップロード許可'
+COMMENT '参加者一覧取得処理'
 
 BEGIN
 
     -- 異常終了ハンドラ
     DECLARE EXIT HANDLER FOR SQLEXCEPTION SET exit_cd = 99;
 
-    UPDATE
-        PICTR_RQST_APPLCTN_PRMTTD
-    SET
-        PRMSSN_CD = _prmssn_cd
+    SELECT
+        TU.USR_NUM
+        ,TU.USR_NAME
+        ,TU.HSH
+        ,TU.RH_FLG
+        ,TU.BLD_TYP_CD
+        ,TJE.EVNT_WK_CD
+        ,TJE.SNS_AT_FLG
+        ,TJE.IMG_AT_FLG_SHT
+        ,TJE.IMG_AT_FLG_SHTD
+        ,TLF.FRNDS_CD
+        ,TP.PSTN_CD
+        ,CPC.PSTN_NAME
+    FROM
+        T_USR TU
     WHERE
         EVNT_NUM = _event_num
+    LEFT OUTER JOIN
+        T_JN_EVNT TJE
+    ON
+        TU.EVNT_NUM = TJE.EVNT_NUM
     AND
-        PICTR_NO = _pictr_no
+        TU.USR_NUM = TJE.USR_NUM
+    LEFT OUTER JOIN
+        T_LK_FRNDS TLF
+    ON
+        TU.EVNT_NUM = TLF.EVNT_NUM
     AND
-        APPLCNT_USR_NUM = _applcnt_user_num
+        TU.USR_NUM = TLF.USR_NUM
+    LEFT OUTER JOIN
+        C_FRNDS_CD CFC
+    ON
+        TLF.FRNDS_CD = CFC.FRNDS_CD
+    LEFT OUTER JOIN
+        T_PSTN TP
+    ON
+        TU.EVNT_NUM = TP.EVNT_NUM
     AND
-        ATHRZR_USR_NUM = _athrzr_user_num
+        TU.USR_NUM = TP.USR_NUM
+    LEFT OUTER JOIN
+        C_PSTN_CD CPC
+    ON
+        TP.PSTN_CD = CPC.PSTN_CD
     ;
-
-    call prmssn_check(_event_num_applcnt_user_num,_athrzruser_num,_pictr_no,_prmssn_cd);
 
     SET exit_cd = 0;
 
