@@ -3,10 +3,15 @@
 <!-- このページから開始 -->
 <!-- 登録システム　実際はこっちで登録してるから不要なのでは -->
 
+<?php
+    if(!empty($_COOKIE["EVNT_NUM"]) && !empty($_COOKIE["USR_NUM"])){
+        header('Location: /portal_web_beta/crient/main/html/kemopo.html');
+    }
+?>
+
 <div id = "entrance">
     <form>
-        <p>ユーザ名入力:<input type = "text" id = "USR_NAME"></p>
-        <p>ユーザコード入力:<input type = "text" id = "USR_CD"></p>
-        <button type = "button" id = "register_usercd" value = "register_usercd">ユーザコード登録</button>
+        <p>コード入力:<input type = "text" id = "EVNT_USR_CD"></p>
+        <button type = "button" id = "register_usercd" value = "register_usercd">参加</button>
     </form>
 </div>

@@ -2,20 +2,20 @@
 session_start();
 if(!empty($_POST)){
     // 平文パスワード
-    $username = $_POST["username"];
+    $bng_no = $_POST["bng_no"];
     $password = $_POST["password"];
 
     $arg_arr = array(
-        "user_name" => $username
+        "bng_no" => $bng_no
     );
 
     // ストアド呼び出し用のファイルをロード
     require_once ("../php/stored.php");
 
-    $result = stored("login_check_001",$arg_arr);
+    $result = stored("passwd_check_001",$arg_arr);
 
     if(!$result[0]){
-        echo json_encode("ユーザー名が間違っています");
+        echo json_encode("ビンゴ番号が存在しません");
         return;
     }
 
@@ -27,15 +27,15 @@ if(!empty($_POST)){
         $_SESSION['trk_num'] = $result[0]["TRK_NUM"];
 
         // 正常終了
-        echo 1;
+        echo 0;
     } else {
         // パスワードが間違っている場合
-        echo 2;
+        echo json_encode("パスワードが違います");
     }
 
 }else{
     // 未知のエラー
-    echo 0;
+        echo json_encode("未知のエラーです");
 }
 
 ?>

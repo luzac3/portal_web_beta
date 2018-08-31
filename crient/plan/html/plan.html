@@ -1,9 +1,17 @@
+<?php
+    session_start();
+    if(empty($_SESSION["EVNT_NUM"]) || empty($_SESSION["USR_NUM"])){
+        header('Location: /portal_web_beta/crient/main/html/entrance.html');
+    }
+?>
+
 <!DOCTYPE html>
 
 <!-- 時間ごとにラベル的なあれで一覧が表示される -->
 
 <?php
     // DB空データを取得
+    require_once("stored.php");
 
     // イベント通番を配列にセット　セッションで取得
     $arg_arr = array("EVNT_NUM" => $event_num);

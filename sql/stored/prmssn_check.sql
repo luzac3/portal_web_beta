@@ -44,8 +44,8 @@ BEGIN
     SET
         許可コード = (
             SELECT
-                WHEN
-                    CASE NOT EXISTS(
+                CASE
+                    WHEN NOT EXISTS(
                         SELECT
                             *
                         FROM
@@ -62,7 +62,7 @@ BEGIN
                             -- 許可コード2以外がいない(全許可)
                             PRMSSN_CD <> '2'
                     ) THEN '2'
-                    CASE EXISTS (
+                    WHEN EXISTS (
                         SELECT
                             *
                         FROM
@@ -79,8 +79,8 @@ BEGIN
                             -- 許可コード3が一つでも存在(差し戻し)
                             PRMSSN_CD = '3'
                     ) THEN '3'
-                    (
-                        CASE NOT EXISTS(
+                    WHEN (
+                        NOT EXISTS(
                             SELECT
                                 *
                             FROM
@@ -98,7 +98,7 @@ BEGIN
                                 PRMSSN_CD = '3'
                         )
                         AND
-                        CASE EXISTS(
+                        EXISTS(
                             SELECT
                                 *
                             FROM

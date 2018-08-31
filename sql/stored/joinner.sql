@@ -22,7 +22,7 @@ DELIMITER //
 -- 【更新履歴】
 --  2018.6.05 大杉　新規作成
 -- ********************************************************************************************
-CREATE PROCEDURE `dl_sns_prmssn`(
+CREATE PROCEDURE `joinner`(
     IN `_event_num` CHAR(5)
     , OUT `exit_cd` INTEGER
 )
@@ -48,8 +48,6 @@ BEGIN
         ,CPC.PSTN_NAME
     FROM
         T_USR TU
-    WHERE
-        EVNT_NUM = _event_num
     LEFT OUTER JOIN
         T_JN_EVNT TJE
     ON
@@ -76,6 +74,8 @@ BEGIN
         C_PSTN_CD CPC
     ON
         TP.PSTN_CD = CPC.PSTN_CD
+    WHERE
+        TU.EVNT_NUM = _event_num
     ;
 
     SET exit_cd = 0;
