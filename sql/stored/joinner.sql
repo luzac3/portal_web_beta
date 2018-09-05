@@ -46,10 +46,11 @@ BEGIN
         ,TLF.FRNDS_CD
         ,TP.PSTN_CD
         ,CPC.PSTN_NAME
+        ,CPC.ATHRTY_LVL
     FROM
-        T_USR TU
+        T_USR TU --------------------------------------------------ユーザ情報 TU
     LEFT OUTER JOIN
-        T_JN_EVNT TJE
+        T_JN_EVNT TJE ---------------------------------------------イベント参加ユーザ情報 TJE
     ON
         TU.EVNT_NUM = TJE.EVNT_NUM
     AND

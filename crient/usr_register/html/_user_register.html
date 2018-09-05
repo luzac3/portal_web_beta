@@ -1,0 +1,68 @@
+<html>
+  <body>
+
+    <form id="my_form" action="http://example.com/cgi-bin/upload.cgi" method="post" enctype="multipart/form-data" >
+
+      <textarea name="my_textarea">!! MY VALUE A !!</textarea> <br>
+
+      <input type="text"   name="my_text"   value="!! MY VALUE B !!"> <br>
+      <input type="hidden" name="my_hidden" value="!! MY VALUE C !!"> <br>
+      <input type="file"   name="my_file"> <br>
+
+      <input type="submit" value="送信">
+
+    </form>
+
+    <script type="text/javascript">
+    <!--
+	// 匿名関数を即時実行
+	(function(){
+
+		// ------------------------------------------------------------
+		// FormData に対応していない
+		// ------------------------------------------------------------
+		if(!(window.FormData)) return;
+
+		// ------------------------------------------------------------
+		// フォーム要素を取得する
+		// ------------------------------------------------------------
+		// id 属性が、"my_form" であるエレメントを取得
+		var form = document.getElementById("my_form");
+
+		// ------------------------------------------------------------
+		// サブミット直前に実行されるイベント
+		// ------------------------------------------------------------
+		form.addEventListener("submit" , function(e){
+
+			// ------------------------------------------------------------
+			// デフォルトの動作をキャンセル（フォームの送信を中止）
+			// ------------------------------------------------------------
+			e.preventDefault();
+
+			// ------------------------------------------------------------
+			// FormData オブジェクトを作成する
+			// ------------------------------------------------------------
+			var form_data = new FormData(form);
+
+			// 出力テスト
+			console.log(form_data);
+
+			// ------------------------------------------------------------
+			// XMLHttpRequest を使った通信
+			// ------------------------------------------------------------
+			// XMLHttpRequest オブジェクトを作成
+			//var xhr = new XMLHttpRequest();
+
+			// 「POST メソッド」「接続先 URL」を指定
+			//xhr.open("POST" , form.action);
+
+			// 送信データに FormData を指定、XHR 通信を開始する
+			//xhr.send(form_data);
+		});
+
+	})();
+    //-->
+    </script>
+
+  </body>
+</html>

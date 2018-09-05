@@ -89,6 +89,7 @@
             $num = 0;
         }
     }
+
     // receiptをBLOBで保存
     $arg_arr = array(
         "EVNT_NUM"=>""
