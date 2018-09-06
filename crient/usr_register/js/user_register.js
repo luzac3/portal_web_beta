@@ -13,8 +13,6 @@ $(document).ready(function(){
         if(file){
             const form = document.getElementById("form");
             fd = new FormData(form);
-            // fd.append("user_id",user_id);
-            // fd.append("user_name",user_name);
             fd.append("file",file);
 
             for(let[key,val] of fd.entries()){
