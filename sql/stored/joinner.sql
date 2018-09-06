@@ -48,9 +48,9 @@ BEGIN
         ,CPC.PSTN_NAME
         ,CPC.ATHRTY_LVL
     FROM
-        T_USR TU --------------------------------------------------ユーザ情報 TU
+        T_USR TU
     LEFT OUTER JOIN
-        T_JN_EVNT TJE ---------------------------------------------イベント参加ユーザ情報 TJE
+        T_JN_EVNT TJE
     ON
         TU.EVNT_NUM = TJE.EVNT_NUM
     AND

@@ -11,7 +11,7 @@ DELIMITER //
 --   インデックス
 --
 -- 【引数】
---   _user_num            ：ユーザ通番
+--   _user_cd             ：ユーザコード
 --   _url                 ：URL
 --
 --
@@ -24,8 +24,8 @@ DELIMITER //
 --  2018.6.05 大杉　新規作成
 -- ********************************************************************************************
 CREATE PROCEDURE `register_user_icon`(
-    IN `_user_num` VARCHAR(20)
-    , IN `_url` VARCHAR(50)
+    IN `_user_cd` VARCHAR(20)
+    , IN `_url` VARCHAR(100)
     , OUT `exit_cd` INTEGER
 )
 COMMENT 'ユーザー登録'
@@ -48,7 +48,7 @@ BEGIN
     SET
         ICN_URL = _url
     WHERE
-        USR_NUM = _user_num
+        USR_CD = _user_cd
     ;
 
     SET exit_cd = 0;

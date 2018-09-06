@@ -76,7 +76,7 @@ BEGIN
 
 set @query = CONCAT("
     SELECT
-        USR_NUM
+        USR_CD
     FROM
         T_USR
     WHERE
