@@ -1,5 +1,7 @@
 <?php
-    require_once("/portal_web_beta/common/php/call_stored.php");
+    $root = $_SERVER["DOCUMENT_ROOT"];
+
+    require_once($root . "/portal_web_beta/common/php/stored.php");
 
 if(!empty($_POST["user_id"])){
     // 配列取得
@@ -15,15 +17,15 @@ if(!empty($_POST["user_id"])){
     $tmp_path = $file['tmp_name'];
 
     // 拡張子を取得
-    $ext = pathinfo($file_name, strrpos($file_name, '.') + 1);
+    $ext = pathinfo($file["name"], strrpos($file["name"], '.') + 1);
 
     // 保存先のパスを設定
     $upload_path = $_SERVER["DOCUMENT_ROOT"] . '/portal_web_beta/data/icon/';
-
     if (is_uploaded_file($tmp_path)) {
         // DBにアクセスしてユーザを作成、ユーザ通番を取得
-        $result = call_stored("register_user",$arg_arr);
-
+        $result = stored("register_user",$arg_arr);
+        echo json_encode(0);
+        /*
         foreach ($result as $row){
             // ファイル名をユーザ通番に設定。元のファイル名は不要なので破棄
             $file_name = $row["USR_NUM"];
@@ -42,12 +44,13 @@ if(!empty($_POST["user_id"])){
             );
 
             // テーブルに登録
-            $result = call_stored("register_user_icon",$arg_arr2);
-
+            $result = stored("register_user_icon",$arg_arr2);
             echo json_encode($result);
         }else{
             echo json_encode(0);
         }
+            echo json_encode(0);
+*/
     }else{
         echo json_encode(1);
     }

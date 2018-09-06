@@ -14,7 +14,7 @@ function ajax_set(php_name,fd){
         }).then(
             function(data){
                 console.log(data);
-                let ret = parseInt(data);
+                const ret = parseInt(data);
 
                 console.log(data);
 

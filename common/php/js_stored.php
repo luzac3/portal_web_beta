@@ -2,7 +2,7 @@
 if(!empty($_POST)){
 
     // ストアドプロシージャ実行関数読み込み
-    require_once ("./stored.php");
+    require_once (dirname(__FILE__) . "./stored.php");
 
     // ストアド名を取得
     $stored = $_POST["stored_name"];
