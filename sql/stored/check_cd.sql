@@ -37,25 +37,17 @@ BEGIN
 
     SELECT
         CASE
-            WHEN(
+            WHEN
                 EXISTS(
                     SELECT
                         *
                     FROM
-                        T_USR
+                        T_JN_EVNT
                     WHERE
                         USR_CD = _user_cd
-                )
-                AND
-                EXISTS(
-                    SELECT
-                        *
-                    FROM
-                        T_EVNT_MSTR
-                    WHERE
+                    AND
                         EVNT_CD = _event_cd
-                )
-            ) THEN '0'
+                ) THEN '0'
             ELSE '1' END INTO @exit_cd
     ;
 

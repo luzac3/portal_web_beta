@@ -11,6 +11,7 @@ DELIMITER //
 --   インデックス
 --
 -- 【引数】
+--  _event_name            :
 --
 --
 -- 【戻り値】
@@ -22,7 +23,8 @@ DELIMITER //
 --  2018.6.05 大杉　新規作成
 -- ********************************************************************************************
 CREATE PROCEDURE `register_event`(
-        IN `_strt_yr` CHAR(4)
+        IN `_event_name` VARCHAR(40)
+        ,IN `_strt_yr` CHAR(4)
         ,IN `_end_yr` CHAR(4)
         ,IN `_strt_mnth` CHAR(2)
         ,IN `_end_mnth` CHAR(2)
@@ -49,13 +51,12 @@ BEGIN
         SET exit_cd = 99;
     END;
 
-    SET @now_date = NOW(3);
-
     INSERT INTO
-        T_USR
+        T_EVNT_MSTR
     (
         EVNT_NUM
         ,EVNT_CD
+        ,EVNT_NAME
         ,STRT_YR
         ,END_YR
         ,STRT_MNTH
@@ -74,6 +75,7 @@ BEGIN
     SELECT
         LPAD((MAX(CAST(EVNT_NUM AS SIGNED)) + 1),5,"0")
         ,LPAD(hex(cast(REVERSE(LPAD((MAX(CAST(EVNT_NUM AS SIGNED)) + 1),5,"0")) as signed)),5,"0")
+        ,_event_name
         ,_strt_yr
         ,_end_yr
         ,_strt_mnth
@@ -91,13 +93,6 @@ BEGIN
     FROM
         T_EVNT_MSTR
     ;
-
-    SET @query_text = @query;
-
-    -- 実行
-    PREPARE main_query FROM @query_text;
-    EXECUTE main_query;
-    DEALLOCATE PREPARE main_query;
 
     SET exit_cd = 0;
 
