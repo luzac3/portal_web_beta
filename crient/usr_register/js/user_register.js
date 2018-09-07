@@ -22,7 +22,7 @@ $(document).ready(function(){
 
         const php = "/portal_web_beta/crient/usr_register/php/upload.php";
 
-        ajax_set(php,fd).then(function(data){
+        ajax_form_set(php,fd).then(function(data){
             console.log(data);
         },function(data){
             console.log(data);
