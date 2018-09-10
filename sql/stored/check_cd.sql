@@ -48,7 +48,7 @@ BEGIN
                     AND
                         EVNT_CD = _event_cd
                 ) THEN '0'
-            ELSE '1' END INTO @exit_cd
+            ELSE '1' END INTO exit_cd
     ;
 
 END
