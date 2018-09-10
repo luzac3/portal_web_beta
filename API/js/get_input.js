@@ -4,16 +4,16 @@
  */
 function get_form_val(class_name,get_disabled_flg = false){
     // idは取得するHTMLタグのID
-    const obj_list = document.getElementByClassName(class_name);
+    const obj_list = document.getElementsByClassName(class_name);
 
     // 取得したフォームの値を格納する配列
     const val_arr = {};
 
-    obj_list.forEach(function(obj){
+    Array.prototype.forEach.call(obj_list,function(obj){
         // IDの取得
         const id = obj.id;
 
-        const disabled = element.disabled;
+        const disabled = obj.disabled;
 
         if(document.getElementById(id).value === undefined){
             // 値がない場合はラッパー(チェックボックスとラジオ)

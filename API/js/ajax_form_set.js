@@ -1,15 +1,16 @@
 // 呼び出してリターンを待ち、帰ってきた結果を返却する処理
-function ajax_set(php_name,arg_arr){
+function ajax_form_set(php_name,fd){
     return new Promise(function(resolve, reject){
         $.ajax({
             url: php_name,
             cache: false,
             timeout: 30*60*1000,
-            type:'POST',
+            // type:'POST',
+            method:'POST',
             dataType: 'json',
-            data: {
-                arg_arr:arg_arr
-            }
+            data: fd,
+            processData: false
+            ,contentType: false
         }).then(
             function(data){
                 console.log(data);
