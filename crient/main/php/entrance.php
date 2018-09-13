@@ -12,17 +12,17 @@ $evnt_usr_cd = $_POST["arg_arr"]["EVNT_USR_CD"];
     );
     // コードの存在チェック
     require_once($root . "/portal_web_beta/common/php/stored.php");
-    $result = call_stored("check_cd",$arg_arr);
+    $result = stored("check_cd",$arg_arr);
 
     echo json_encode($arg_arr["event_code"]);
-/*
+
     if(!$result["exit_cd"]){
         setcookie("EVNT_NUM", $event_code, time()+60*60*24*10);
         setcookie("USR_CD", $user_code, time()+60*60*24*10);
     }
 
     echo json_encode(0);
-*/
+
 }else{
 	echo json_encode(1);
 }
