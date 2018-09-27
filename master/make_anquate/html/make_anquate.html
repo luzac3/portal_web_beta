@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- ここに来る段階でイベントはセッションに記録されている想定 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>アンケート作成</title>
+</head>
+<body>
+
+<!-- ここ自体のアクセス権限は誰にでもある。企画側なら全員所持 -->
+<!-- ユーザが解答したアンケートの閲覧権限は設定がなければ全員(運営のみ公開も可能) -->
+<!-- シークレットアンケートのアクセス権限は作成者と主催・服主催。 -->
+<!-- 編集などの権限は企画者と管理者のみ -->
+<!-- 削除は主催のみ -->
+<div id = "mkae_anquate">
+    <form><table>
+        <tr>
+            <th>項目番号</th>
+            <th>項目種別</th>
+            <th>質問文</th>
+            <th>汎用</th>
+            <th>選択肢</th>
+        </tr>
+        <tr class = "1">
+            <td class = "ITM_NO">1</td>
+            <td>
+                <select name = "ITM_KND">
+                    <option value = "0">テキスト
+                    <option value = "1">ラジオボタン
+                    <option value = "2">チェックボックス
+                    <option value = "3">数字
+                    <option value = "4">パスワード
+                    <option value = "5">テキストエリア
+                </select>
+            </td>
+            <td><input name = "q_text" type = "text"></td>
+            <td><input name = "GNRL_FLG" type = "checkbox"></td>
+            <td>
+                <p>
+                    <input name = "choose" type = "text" disabled>
+                </p>
+                <button type = "button">項目を増やす</button>
+            </td>
+        </tr>
+    </table></form>
+</div>
+</body>
+</html>
