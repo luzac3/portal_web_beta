@@ -1,0 +1,22 @@
+<!-- イベントリストを表示、取得するための雛形 -->
+<?php
+    // リダイレクトのヘッダロード場所
+
+    // db接続、イベントリスト取得
+
+    // イベントリストの並び替えができるようにしておく
+
+    foreach($row as $eventList){
+        echo "<a href = 'javascript:void(0)'>";
+        echo $row["NAME"];
+        echo "</a>";
+        echo $row["DATE"];
+        if($row["DATE2"]){
+            echo "～";
+            echo $row["DATE2"];
+        }
+        echo $row["TAG"];
+        echo $row["JN_STTS"];
+        echo $row["STTS"];
+    }
+?>

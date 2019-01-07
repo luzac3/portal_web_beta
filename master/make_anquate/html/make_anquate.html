@@ -36,10 +36,10 @@
         </tr>
         <?php
             for($i=0; $i < 10; $i++){
-                echo "<tr class = '" . $i . "'>\n";
+                echo "<tr>\n";
                 echo "<td class = 'ITM_NO'>" . $i . "</td>\n";
                 echo "<td>\n";
-                echo "<select name = 'ITM_KND'>\n";
+                echo "<select name = 'ITM_KND' class = 'anquate'>\n";
 
                 forEach($result as $row){
                     echo "<option value = '" . $row["CD"] . "'>" . $row["NAME"] . "\n";
@@ -48,14 +48,14 @@
                 echo "</select>\n";
                 echo "</td>\n";
 
-                echo "<td><input name = 'q_text' type = 'text'></td>\n";
-                echo "<td><input name = 'GNRL_FLG' type = 'checkbox'></td>\n";
+                echo "<td><input name = 'q_text' type = 'text' class = 'anquate'></td>\n";
+                echo "<td name = 'GNRL_FLG' class = 'anquate'><input name = 'GNRL_FLG' type = 'checkbox' value = 1></td>\n";
 
                 echo "<td>\n";
                 echo "<p>\n";
-                echo "<input name = 'choose' type = 'text' disabled>\n";
+                echo "<input name = 'choose' type = 'text' class = 'anquate' disabled>\n";
                 echo "</p>\n";
-                echo "<button type = 'button'>項目を増やす</button>\n";
+                echo "<button type = 'button' value = 'add'>項目を増やす</button>\n";
                 echo "</td>\n";
                 echo "</tr>\n";
             }
@@ -70,6 +70,7 @@
                     <option value = "5">テキストエリア
 -->
     </table></form>
+    <button type="button" value = "register">登録</button>
 </div>
 </body>
 </html>
