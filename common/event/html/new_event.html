@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新規イベント作成</title>
+</head>
+<body>
+
+<!-- 要件に従ってイベントを作成させる -->
+
+<!-- イベント名 -->
+
+<form>
+<!-- 開催日時 -->
+<p>開催日時<input type="date" id="date">
+
+<!-- 募集時アンケート -->
+<!-- アンケート作成はサブウィンドウを開いて行う -->
+<p>募集時アンケートあり<input type="checkbox" id="ancateFlg">
+
+<!-- 募集締め切り日 -->
+<p>締め切り日<input type="date" id="deadLine">
+
+<!-- 募集形態 -->
+<p>募集形態<select id="keitai">
+<?php
+    // コードリスト取得
+    foreach($row as $result){
+        echo "<option value = '".$row["CD"]."'>".$row["keitai"]."\n";
+    }
+?>
+</select></p>
+
+<!-- タグ -->
+<p>タグ</p>
+<p><input type="text"><button type="button" id="tag_1" value="tagAdd">タグを増やす</button></p>
+
+<!-- 枠 -->
+<p>枠を分ける<input type="checkbox"></p>
+
+<!-- 募集人数変更用 -->
+<!-- デフォルトでは、時間がかぶっている部分は自動的に人数を合算して表示 -->
+<p class="none">重複部分の人数を合算する<input type="checkbox" name="wakuOptn" value="0"></p>
+<p class="none">枠ごとに募集定員を設ける<input type="checkbox" name="wakuOptn" value="1"></p>
+<p class="none">イベント全体で募集定員を設定する<input type="checkbox" name="wakuOptn" value="2"></p>
+
+<!-- 枠を分ける場合、以下の設定を複製 -->
+<div id ="waku_0">
+
+<!-- 参加費 -->
+<p>参加費<input type="number" id="fee"></p>
+
+</div>
+<!-- 募集人数 -->
+<p>募集人数:<input type="text">
+</form>
+
+<button type="button" value="make">作成</button>
+
+</body>
+</html>

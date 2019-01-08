@@ -7,7 +7,11 @@
     // イベントリストの並び替えができるようにしておく
 
     foreach($row as $eventList){
-        echo "<a href = 'javascript:void(0)'>";
+        echo "<a ";
+        echo "id='";
+        echo $row["CD"];
+        echo "' ";
+        echo "href = 'javascript:void(0)'>";
         echo $row["NAME"];
         echo "</a>";
         echo $row["DATE"];
