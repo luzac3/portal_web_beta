@@ -1,0 +1,30 @@
+<?php
+// データロード
+// ログインしていなかったらリダイレクト
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>イベント名をここに表示</title>
+</head>
+<body>
+<?php
+
+    /*
+     * イベントページのHTMLを丸々保存
+     * 線の太さや色はクラスを設定しておいて事前にCSSで保持
+     */
+
+    // タイトル
+    echo "<h1>";
+    echo $result["EVNT_NAME"];
+    echo "</h1>\n";
+
+
+
+?>
+
+
+</body>
+</html>
